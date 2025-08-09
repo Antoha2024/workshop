@@ -1,20 +1,20 @@
-# Use an official Python runtime as a parent image
+# Используйте официальный образ Python версии 3.9 slim
 FROM python:3.9-slim
 
-# Set the working directory in the container
+# Установите рабочую директорию внутри контейнера
 WORKDIR /app
 
-# Copy the current directory contents into the container at /app
+# Скопируйте содержимое текущего каталога внутрь образа в папку /app
 COPY . /app
 
-# Install any needed packages specified in requirements.txt
+# Установите зависимости из файла requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Make port 80 available to the world outside this container
+# Откройте порт 80 для внешнего мира
 EXPOSE 80
 
-# Define environment variable
-ENV NAME World
+# Определите переменную окружения NAME со значением 'World' в правильном формате
+ENV NAME=World
 
-# Run app.py when the container launches
+# Запустите uvicorn с указанием приложения main:app и портом 80
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "80"]
